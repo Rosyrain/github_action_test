@@ -26,4 +26,7 @@ func Connect(url string) bool {
 func main() {
 	url := "https://www.baidu.com"
 	fmt.Println(Connect(url))
+	if Connect(url) {
+		fmt.Println("成功链接...")
+	}
 }
