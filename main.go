@@ -28,5 +28,7 @@ func main() {
 	fmt.Println(Connect(url))
 	if Connect(url) {
 		fmt.Println("成功链接...")
+	} else {
+		fmt.Println("failed connect...")
 	}
 }
