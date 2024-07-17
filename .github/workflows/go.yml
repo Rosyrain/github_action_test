@@ -34,4 +34,4 @@ jobs:
         who-to-greet: 'Rosyrain'
 
     - name: Get the step-hello output
-      run: echo "The time was &{{ steps.hello.outputs.time }}
+      run: echo "The time was ${{ steps.hello.outputs.time }}
