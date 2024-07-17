@@ -34,7 +34,7 @@ jobs:
         who-to-greet: 'Rosyrain'
 
     - name: Get the step-docker_hello output
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      run: echo "The time was ${{ steps.docker_hello.outputs.time }}"
 
     - name: Test JS Hello-action
       id: js_hello
@@ -43,4 +43,4 @@ jobs:
         who-to-greet: 'Rosyrain'
 
     - name: Get the step-js_hello output
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+      run: echo "The time was ${{ steps.js_hello.outputs.time }}"
