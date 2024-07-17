@@ -22,4 +22,4 @@ jobs:
           ISUE_NUMBER: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ASSIGNEE: Rosyrain
-        uses: Rosyrain/CI_test/actions/issue-no_pr-action@master
+        uses: Rosyrain/CI_test@master
