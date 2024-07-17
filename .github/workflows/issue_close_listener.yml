@@ -19,7 +19,7 @@ jobs:
         env:
           OWNER: Rosyrain
           REPOSITORY: github_action_test
-          ISUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ASSIGNEE: Rosyrain
         uses: Rosyrain/CI_test@master
