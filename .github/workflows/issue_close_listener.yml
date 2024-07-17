@@ -21,5 +21,5 @@ jobs:
           REPOSITORY: github_action_test
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ASSIGNEE: Rosyrain
+          ASSIGNEES: Rosyrain
         uses: Rosyrain/CI_test/actions/issue-no_pr-action@master
