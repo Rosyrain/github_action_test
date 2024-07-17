@@ -1,0 +1,29 @@
+name: Check Closed Issues Without PR
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  check_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Go environment
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.22.3'
+
+      - name: Install dependencies
+        run: |
+          go get -u github.com/google/go-github/github
+
+      - name: Run script to check closed issues without PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: YOUR_REPO_OWNER
+          REPO_NAME: YOUR_REPO_NAME
+          ASSIGNEE: sukki37
+        run: |
