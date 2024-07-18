@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check closed issues without PR
-        env:
+        with:
           OWNER: Rosyrain
           REPOSITORY: github_action_test
           ISSUE_NUMBER: ${{ github.event.issue.number }}
