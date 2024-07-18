@@ -1,0 +1,39 @@
+name: Binary Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
+    branches:
+      - main
+jobs:
+  binary_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Go Env
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22.3'
+
+      - name: Build Go
+        run: go build -v ./...
+
+      - name: Test Go
+        run: go test -v ./...
+
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y valgrind
+
+      - name: Run tests with Valgrind
+        run: |
+          valgrind --leak-check=full --error-exitcode=1 ./main.exe
