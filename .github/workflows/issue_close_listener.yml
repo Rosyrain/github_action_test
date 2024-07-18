@@ -8,18 +8,11 @@ jobs:
   check_issues:
     runs-on: ubuntu-latest
     steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v2
-#
-#      - name: Set up Go environment
-#        uses: actions/setup-go@v2
-#        with:
-#          go-version: '1.22.3'
       - name: Check closed issues without PR
         env:
           OWNER: Rosyrain
           REPOSITORY: github_action_test
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ASSIGNEE: Rosyrain
+          ASSIGNEES: Rosyrain
         uses: Rosyrain/CI_test@master
