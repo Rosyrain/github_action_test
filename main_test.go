@@ -13,7 +13,7 @@ func TestConnect(t *testing.T) {
 		args args
 		want bool
 	}{
-		// TODO: Add test cases.
+		// TODO: Add test cases..
 		{name: "success connect", args: args{url: "https://www.baidu.com"}, want: true},
 		{name: "failed connect", args: args{url: "www.baidu.com"}, want: false},
 		{name: "bad connect", args: args{url: "http://www.baidu.com"}, want: true},
