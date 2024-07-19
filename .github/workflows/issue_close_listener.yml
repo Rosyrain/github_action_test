@@ -5,14 +5,14 @@ on:
     types: [closed]
 
 jobs:
-  check_issues:
+  check_issues_noRelatedPR:
     runs-on: ubuntu-latest
-    if: github.actor != 'Rosyrain'
+    if: github.actor != 'suki77'
     steps:
       - name: Check closed issues without PR
         with:
-          OWNER: Rosyrain
-          REPOSITORY: github_action_test
+          OWNER: ${{ github.repository_owner }}
+          REPOSITORY: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           ASSIGNEES: Rosyrain
