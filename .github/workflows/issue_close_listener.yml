@@ -7,7 +7,7 @@ on:
 jobs:
   check_issues_noRelatedPR:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'sukki77' }}
+    if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && github.actor != 'sukki77' }}
     steps:
       - name: Check closed issues without PR
         with:
