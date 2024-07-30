@@ -7,7 +7,7 @@ on:
 jobs:
   check_issues_noRelatedPR:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && github.actor!= 'ukki37' && contains(github.event.issue.labels.*.name, 'bug') || contains(github.event.issue.labels.*.name, 'feature') || contains(github.event.issue.labels.*.name,'subtask') || contains(github.event.issue.labels.*.name, 'tech-request') }}
+    if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && github.actor!= 'sukki37' }}
     steps:
       - name: Check closed issues without PR
         with:
@@ -16,6 +16,6 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           ASSIGNEES: Rosyrain
-          LABELS: '["needs-review","no-pull_request"]'
+          LABELS: '["no-pr-linked"]'
           LABELS_NEED: '["tech-request","feature","Feature","kind/feature","attention/feature-incomplete","bug/ut","Bug fix","kind/bug","kind/subtask","kind/tech-request"]'
         uses: Rosyrain/CI_test/actions/issue-no-PR@main
