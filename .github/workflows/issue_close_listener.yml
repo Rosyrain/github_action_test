@@ -17,4 +17,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           ASSIGNEES: Rosyrain
           LABELS: '["no-pr-linked"]'
+          LABELS_NEED: '["tech-request","feature","Feature","kind/feature","attention/feature-incomplete","bug/ut","Bug fix","kind/bug","kind/subtask","kind/tech-request"]'
         uses: Rosyrain/CI_test/actions/issue-no-PR@main
