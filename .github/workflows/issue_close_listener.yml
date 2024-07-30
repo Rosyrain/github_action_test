@@ -21,6 +21,6 @@ jobs:
           LABELS_NEED: '["tech-request","feature","Feature","kind/feature","attention/feature-incomplete","bug/ut","Bug fix","kind/bug","kind/subtask","kind/tech-request"]'
         uses: Rosyrain/CI_test/actions/issue-no-PR@main
       - name: NOTICE FAIL RESULT
-        if: ${{ github.steps.step1.outputs.send == 'yes' }}
+        if: ${{ steps.step1.outputs.send == 'yes' }}
         run: |
           echo "发送信息... ..."
