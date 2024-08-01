@@ -21,7 +21,7 @@ jobs:
           ASSIGNEES: Rosyrain
           LABELS: 'no-pr-linked-test3'
           LABELS_NEED: 'tech-request,feature,Feature,kind/feature,attention/feature-incomplete,bug/ut,Bug fix,kind/bug,kind/subtask,kind/tech-request'
-        uses: Rosyrain/CI_test/actions/issue-no-PR@main
+        uses: Rosyrain/CI_test/actions/reopen-without-PR@main
       - name: NOTICE FAIL RESULT
         if: ${{ steps.step1.outputs.send == 'yes' }}
         run: |
