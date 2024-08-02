@@ -14,13 +14,13 @@ jobs:
         env:
           BASE_URL: https://api.github.com
         with:
-          OWNER: ${{ github.repository_owner }}
-          REPOSITORY: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          ASSIGNEES: Rosyrain
-          LABELS: 'no-pr-linked-test3'
-          LABELS_NEED: 'tech-request,feature,Feature,kind/feature,attention/feature-incomplete,bug/ut,Bug fix,kind/bug,kind/subtask,kind/tech-request'
+          owner: ${{ github.repository_owner }}
+          repository: ${{ github.repository }}
+          issue_number: ${{ github.event.issue.number }}
+          github_token: ${{ secrets.TOKEN }}
+          assignees: Rosyrain
+          labels: 'no-pr-linked-test3'
+          labels_need: 'tech-request,feature,Feature,kind/feature,attention/feature-incomplete,bug/ut,Bug fix,kind/bug,kind/subtask,kind/tech-request'
         uses: Rosyrain/CI_test/actions/reopen-without-PR@main
       - name: NOTICE FAIL RESULT
         if: ${{ steps.step1.outputs.send == 'yes' }}
