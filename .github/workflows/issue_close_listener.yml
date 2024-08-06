@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.TOKEN }}
           repository: Rosyrain/CI_test/actions/reopen-without-PR@main
-          event-type: my-event
+          event-type: reopen-without-PR
           client-payload: '{"owner": "${{ github.repository_owner }}",
             "repository": "${{ github.repository }}",
             "issue_number": "${{ github.event.issue.number }}",
