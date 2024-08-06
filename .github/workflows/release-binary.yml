@@ -1,60 +1,31 @@
-name: Binary Test and Release
+name: Release
 
 on:
-  push:
-    branches:
-      - release
-  pull_request:
-    branches:
-      - release
+  workflow_dispatch:
 
 jobs:
-  binary_test:
+  job1:
     runs-on: ubuntu-latest
-    outputs:
-      should_release: ${{ steps.valgrind_test.outcome == 'success' }}
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: create binary
+        runs: |
+          echo "create binary success... ..."
 
-      - name: Set up Go Env
-        uses: actions/setup-go@v4
+      - name: binary test
+        uses: peter-evans/repository-dispatch@v3
         with:
-          go-version: '1.22.3'
-
-      - name: Build Go
-        run: go build -o main.exe
-
-      - name: Test Go
-        run: go test -v ./...
-
-      - name: Set up environment
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y valgrind
-
-      - name: Run tests with Valgrind
-        id: valgrind_test
-        run: |
-          valgrind --leak-check=full --error-exitcode=1 ./main.exe
-          echo "::set-output name=should_release::false"
-
-  release:
-    needs: [binary_test]
-    if: needs.binary_test.outputs.should_release == 'true'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            V0.0.1
-          draft: false
-          prerelease: false
+          token: ${{ secrets.TOKEN }}
+          repository: Rosyrain/CI_test
+          event-type: binary-test
+          client-payload: '{
+            "RUNNER": "runner-aron-shpc-2",
+            "GIT_WEBSITE": "github",
+            "MO_REPO": "rosyrain",
+            "MO_VERSION": "main",
+            "MO_DEPLOY_MODE": "binary",
+            "MO_BIN_URL": "https://github.com/xxx/xxx/IDK",
+            "TEST_LIST": "bvt,tpcc,sysbench,ssb,tpch,customer",
+            "BVT_EXCLUDE_CASES": "",
+            "CUS_TEST_OPTION": "ddl,insert,query",
+            "CUS_DS_LIST": "dmt_001,etao_001,unre_004,slooong_003",
+            }'
