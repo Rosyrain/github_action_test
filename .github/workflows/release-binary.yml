@@ -31,5 +31,5 @@ jobs:
             }'
       - name: Get binary test url
         run: |
-          echo "you can find the binary test action on `https://github.com/Rosyrain/github_action_test/actions/workflows/release-binary.yml`"
-          echo "Check in `J_0. Set variables`->`Step_99. Display and output actual variables` to see if the binary file address is correct"
+          echo "you can find the binary test action on https://github.com/Rosyrain/CI_test/actions/workflows/release.yaml "
+          echo "check in [ J_0. Set variables ]->[ Step_99. Display and output actual variables ] to see if the binary file url is correct"
