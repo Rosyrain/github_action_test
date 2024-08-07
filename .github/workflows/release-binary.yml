@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create binary
-        runs: |
+        run: |
           echo "create binary success... ..."
 
       - name: binary test
