@@ -27,5 +27,5 @@ jobs:
             "TEST_LIST": "bvt,tpcc,sysbench,ssb,tpch,customer",
             "BVT_EXCLUDE_CASES": "",
             "CUS_TEST_OPTION": "ddl,insert,query",
-            "CUS_DS_LIST": "dmt_001,etao_001,unre_004,slooong_003",
+            "CUS_DS_LIST": "dmt_001,etao_001,unre_004,slooong_003"
             }'
