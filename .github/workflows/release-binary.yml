@@ -11,7 +11,7 @@ jobs:
         run: |
           echo "create binary success... ..."
 
-      - name: binary test
+      - name: dispatch binary test
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.TOKEN }}
@@ -29,7 +29,7 @@ jobs:
             "CUS_TEST_OPTION": "ddl,insert,query",
             "CUS_DS_LIST": "dmt_001,etao_001,unre_004,slooong_003"
             }'
-      - name:
+      - name: Get binary test url
         run: |
           echo "you can find the binary test action on `https://github.com/Rosyrain/github_action_test/actions/workflows/release-binary.yml`"
           echo "Check in `J_0. Set variables`->`Step_99. Display and output actual variables` to see if the binary file address is correct"
