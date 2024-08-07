@@ -29,3 +29,8 @@ jobs:
             "CUS_TEST_OPTION": "ddl,insert,query",
             "CUS_DS_LIST": "dmt_001,etao_001,unre_004,slooong_003"
             }'
+
+      - name:
+        run: |
+          echo "you can find the binary test action on `https://github.com/Rosyrain/github_action_test/actions/workflows/release-binary.yml`"
+          echo "Check in `J_0. Set variables`->`Step_99. Display and output actual variables` to see if the binary file address is correct"
