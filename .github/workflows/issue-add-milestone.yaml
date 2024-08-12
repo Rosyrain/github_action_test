@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add Milestone to Issue
-        uses: rosyrain/CI_test/actions/milestone-add-action@main
+        uses: guguducken/milestone-add-action@check_mill_exist
+#        uses: rosyrain/CI_test/actions/milestone-add-action@main
         with:
           action-token: ${{ secrets.TOKEN_ACTION }}
           milestone: "1.3.0"
