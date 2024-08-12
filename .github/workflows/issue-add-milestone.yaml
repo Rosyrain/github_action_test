@@ -6,7 +6,7 @@ on:
 
 jobs:
   add-projects-milestone:
-    if: github.event.action == 'opened' && contains(github.event.issue.labels.*.name, 'kind/bug')
+    if: github.event.action == 'reopened' && contains(github.event.issue.labels.*.name, 'kind/bug')
     runs-on: ubuntu-latest
     steps:
       - name: Add Milestone to Issue
