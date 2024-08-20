@@ -10,7 +10,7 @@ jobs:
 #    if: {{ $github.event_name == 'issue' && github.event.action == 'closed' }}
     steps:
       - name: Remove Labels
-        uses: Rosyrain/CI_test/actions/rm-labels@vmain
+        uses: Rosyrain/CI_test/actions/rm-labels@main
         id: step1
         env:
           BASE_URL: https://api.github.com
