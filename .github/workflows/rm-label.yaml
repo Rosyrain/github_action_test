@@ -2,12 +2,12 @@ name: Remove Labels
 
 on:
   issues:
-    types: [closed]
+    types: [assigned]
 
 jobs:
   job1:
     runs-on: ubuntu-latest
-#    if: {{ $github.event_name == 'issue' && github.event.action == 'closed' }}
+    if: {{ github.event.assignee.login != 'matrx-meow' }}
     steps:
       - name: Remove Labels
         uses: Rosyrain/CI_test/actions/rm-labels@main
