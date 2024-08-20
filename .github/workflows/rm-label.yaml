@@ -1,0 +1,26 @@
+name: Remove Labels
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    if: {{ $github.event_name == 'issue' && github.event.action == 'closed' }}
+    steps:
+      - name: Remove Labels
+        uses: Rosyrain/CI_test/actions/rm-labels@vmain
+        id: step1
+        env:
+          BASE_URL: https://api.github.com
+        with:
+          REPOSITORY: ${{ github.repository }}  # 获取执行该作业的仓库名 形如: matrixorigin/CI
+          ISSUE_NUMBER: ${{ github.event.issue.number }}  # 获取当前操作的issue number
+          GITHUB_TOKEN: ${{ secrets.TOKEN_ACTION }}  # 获取github action token操作权限
+          LABELS: 'needs-triage'  #相关自定义label配置 形如 label1,label2
+      - name: WeChat Work notification
+        if: ${{ failure() || cancelled() || steps.step1.outputs.send == 'yes' }}
+        id: notification
+        run: |
+          echo "delete label success... ..."
