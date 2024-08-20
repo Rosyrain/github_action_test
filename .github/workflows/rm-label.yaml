@@ -7,7 +7,7 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    if: {{ $github.event_name == 'issue' && github.event.action == 'closed' }}
+#    if: {{ $github.event_name == 'issue' && github.event.action == 'closed' }}
     steps:
       - name: Remove Labels
         uses: Rosyrain/CI_test/actions/rm-labels@vmain
