@@ -1,17 +1,17 @@
-name: Add Milestone to Issues
-
-on:
-  issues:
-    types: [reopened]
-
-jobs:
-  add-projects-milestone:
-    if: github.event.action == 'reopened' && contains(github.event.issue.labels.*.name, 'kind/bug')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Add Milestone to Issue
-#        uses: guguducken/milestone-add-action@check_mill_exist
-        uses: Rosyrain/CI/actions/milestone-add-action@add-milestone
-        with:
-          action-token: ${{ secrets.TOKEN_ACTION }}
-          milestone: "1.3.0"
+#name: Add Milestone to Issues
+#
+#on:
+#  issues:
+#    types: [reopened]
+#
+#jobs:
+#  add-projects-milestone:
+#    if: github.event.action == 'reopened' && contains(github.event.issue.labels.*.name, 'kind/bug')
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Add Milestone to Issue
+##        uses: guguducken/milestone-add-action@check_mill_exist
+#        uses: Rosyrain/CI/actions/milestone-add-action@add-milestone
+#        with:
+#          action-token: ${{ secrets.TOKEN_ACTION }}
+#          milestone: "1.3.0"

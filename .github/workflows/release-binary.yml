@@ -1,35 +1,35 @@
-name: Release
-
-on:
-  workflow_dispatch:
-
-jobs:
-  job1:
-    runs-on: ubuntu-latest
-    steps:
-      - name: create binary
-        run: |
-          echo "create binary success... ..."
-
-      - name: dispatch binary test
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.TOKEN }}
-          repository: Rosyrain/CI_test
-          event-type: binary-test
-          client-payload: '{
-            "RUNNER": "runner-aron-shpc-2",
-            "GIT_WEBSITE": "github",
-            "MO_REPO": "rosyrain",
-            "MO_VERSION": "main",
-            "MO_DEPLOY_MODE": "binary",
-            "MO_BIN_URL": "https://github.com/xxx/xxx/IDK",
-            "TEST_LIST": "bvt,tpcc,sysbench,ssb,tpch,customer",
-            "BVT_EXCLUDE_CASES": "",
-            "CUS_TEST_OPTION": "ddl,insert,query",
-            "CUS_DS_LIST": "dmt_001,etao_001,unre_004,slooong_003"
-            }'
-      - name: Get binary test url
-        run: |
-          echo "you can find the binary test action on https://github.com/Rosyrain/CI_test/actions/workflows/release.yaml "
-          echo "check in [ J_0. Set variables ]->[ Step_99. Display and output actual variables ] to see if the binary file url is correct"
+#name: Release
+#
+#on:
+#  workflow_dispatch:
+#
+#jobs:
+#  job1:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: create binary
+#        run: |
+#          echo "create binary success... ..."
+#
+#      - name: dispatch binary test
+#        uses: peter-evans/repository-dispatch@v3
+#        with:
+#          token: ${{ secrets.TOKEN }}
+#          repository: Rosyrain/CI_test
+#          event-type: binary-test
+#          client-payload: '{
+#            "RUNNER": "runner-aron-shpc-2",
+#            "GIT_WEBSITE": "github",
+#            "MO_REPO": "rosyrain",
+#            "MO_VERSION": "main",
+#            "MO_DEPLOY_MODE": "binary",
+#            "MO_BIN_URL": "https://github.com/xxx/xxx/IDK",
+#            "TEST_LIST": "bvt,tpcc,sysbench,ssb,tpch,customer",
+#            "BVT_EXCLUDE_CASES": "",
+#            "CUS_TEST_OPTION": "ddl,insert,query",
+#            "CUS_DS_LIST": "dmt_001,etao_001,unre_004,slooong_003"
+#            }'
+#      - name: Get binary test url
+#        run: |
+#          echo "you can find the binary test action on https://github.com/Rosyrain/CI_test/actions/workflows/release.yaml "
+#          echo "check in [ J_0. Set variables ]->[ Step_99. Display and output actual variables ] to see if the binary file url is correct"
