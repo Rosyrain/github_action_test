@@ -10,7 +10,7 @@ jobs:
     if: ${{ github.event.assignee.login != 'matrx-meow' }}
     steps:
       - name: Remove Labels
-        uses: Rosyrain/CI_test/actions/rm-labels@main
+        uses: Rosyrain/CI/actions/rm-labels@rm-labels
         id: step1
         env:
           BASE_URL: https://api.github.com
@@ -20,7 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_ACTION }}  # 获取github action token操作权限
           LABELS: 'needs-triage'  #相关自定义label配置 形如 label1,label2
       - name: WeChat Work notification
-        if: ${{ failure() || cancelled() || steps.step1.outputs.send == 'yes' }}
+        if: ${{ steps.step1.outputs.send == 'yes' }}
         id: notification
         run: |
           echo "assigned to ${{ github.event.assignee.login }}"
