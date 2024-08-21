@@ -10,7 +10,7 @@ jobs:
     if: ${{ github.event.assignee.login != 'matrx-meow' }}
     steps:
       - name: Remove Labels
-        uses: Rosyrain/CI_test/actions/rm-labels@rm-labels
+        uses: Rosyrain/CI_test/actions/rm-labels@main
         id: step1
         env:
           BASE_URL: ${{ github.api_url }}
