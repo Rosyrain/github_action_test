@@ -10,17 +10,17 @@ jobs:
     if: ${{ github.event.assignee.login != 'matrx-meow' }}
     steps:
       - name: Remove Labels
-        uses: Rosyrain/CI/actions/rm-labels@rm-labels
+        uses: Rosyrain/CI_test/actions/rm-labels@rm-labels
         id: step1
         env:
-          BASE_URL: https://api.github.com
+          BASE_URL: ${{ github.api_url }}
         with:
-          REPOSITORY: ${{ github.repository }}  # 获取执行该作业的仓库名 形如: matrixorigin/CI
-          ISSUE_NUMBER: ${{ github.event.issue.number }}  # 获取当前操作的issue number
-          GITHUB_TOKEN: ${{ secrets.TOKEN_ACTION }}  # 获取github action token操作权限
-          LABELS: 'needs-triage'  #相关自定义label配置 形如 label1,label2
+          repository: ${{ github.repository }}  # 获取执行该作业的仓库名 形如: matrixorigin/CI
+          issue_number: ${{ github.event.issue.number }}  # 获取当前操作的issue number
+          github_token: ${{ secrets.TOKEN_ACTION }}  # 获取github action token操作权限
+          labels: 'needs-triage'  #相关自定义label配置 形如 label1,label2
       - name: WeChat Work notification
-        if: ${{ steps.step1.outputs.send == 'yes' }}
+        if: ${{ steps.step1.outputs.result == 'yes' }}
         id: notification
         run: |
           echo "assigned to ${{ github.event.assignee.login }}"
