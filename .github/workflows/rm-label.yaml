@@ -19,9 +19,3 @@ jobs:
           issue_number: ${{ github.event.issue.number }}  # 获取当前操作的issue number
           github_token: ${{ secrets.TOKEN_ACTION }}  # 获取github action token操作权限
           labels: 'needs-triage'  #相关自定义label配置 形如 label1,label2
-      - name: WeChat Work notification
-        if: ${{ steps.step1.outputs.result == 'yes' }}
-        id: notification
-        run: |
-          echo "assigned to ${{ github.event.assignee.login }}"
-          echo "delete label success... ..."
