@@ -5,7 +5,7 @@ on:
     types: [assigned]
 
 jobs:
-  job1:
+  rm-labels:
     runs-on: ubuntu-latest
     if: ${{ github.event.assignee.login != 'matrx-meow' }}
     steps:
