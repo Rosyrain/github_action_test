@@ -18,4 +18,6 @@ jobs:
           repository: ${{ github.repository }}  # 获取执行该作业的仓库名 形如: matrixorigin/CI
           issue_number: ${{ github.event.issue.number }}  # 获取当前操作的issue number
           github_token: ${{ secrets.TOKEN_ACTION }}  # 获取github action token操作权限
-          labels: 'needs-triage'  #相关自定义label配置 形如 label1,label2
+          labels: 'needs-triage'  #要删除的label标签 形如 label1,label2,...
+          current_assignee: ${{ github.event.assignee.login }}
+          blacklist: 'matrix-meow'  #黑名单形如: user1,user2,...
