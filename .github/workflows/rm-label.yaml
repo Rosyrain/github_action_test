@@ -7,7 +7,6 @@ on:
 jobs:
   rm-labels:
     runs-on: ubuntu-latest
-    if: ${{ github.event.assignee.login != 'matrx-meow' }}
     steps:
       - name: Remove Labels
         uses: Rosyrain/CI/actions/rm-labels@rm-labels
