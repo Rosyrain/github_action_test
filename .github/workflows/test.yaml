@@ -13,6 +13,17 @@ on:
       DOCU_GROUP_HOOK:
         description: "DOCU_GROUP_HOOK"
         required: true
+  workflow_dispatch:
+    inputs:
+      TOKEN_ACTION:
+        description: "TOKEN_ACTION"
+        required: true
+      WECHAT_WORK_BOT_WEBHOOK:
+        description: "WECHAT_WORK_BOT_WEBHOOK"
+        required: true
+      DOCU_GROUP_HOOK:
+        description: "DOCU_GROUP_HOOK"
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel.
 jobs:
