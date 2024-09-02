@@ -13,8 +13,6 @@ jobs:
       - name: Check Issue
         id: step1
         uses: Rosyrain/CI_test/actions/reopen-without-PR@main
-        env:
-          BASE_URL: https://api.github.com
         with:
           base_url: ${{ github.api_url }}
           repository: ${{ github.event.client_payload.repository }}
