@@ -11,16 +11,16 @@ jobs:
         id: step1
         uses: Rosyrain/CI_test/actions/reopen-without-PR@main
         with:
-          base_url: ${{ github.api_url }}
-          repository: ${{ github.event.client_payload.repository }}
-          issue_number: ${{ github.event.client_payload.issue_number }}
-          github_token: ${{ github.event.client_payload.github_token }}
-          assignees: ${{ github.event.client_payload.assignees }}
-          labels: ${{ github.event.client_payload.labels }}
-          labels_need: ${{ github.event.client_payload.labels_need }}
-          whitelist: "sukki77,fengttt,aressu1985"
+          whitelist: 'sukki77,fengttt,aressu1985'
           issue_owner: ${{ github.event.issue.user.login }}
           close_user: ${{ github.event.sender.login }}
+          github_token: ${{ secrets.TOKEN_ACTION }}  # 获取github action token操作权限
+          base_url: ${{ github.api_url }}
+          repository: ${{ github.repository }}  # 获取执行该作业的仓库名 形如: matrixorigin/CI
+          issue_number: ${{ github.event.issue.number }}  # 获取当前操作的issue number
+          assignees: 'rosyrain'  #issue指定分配对象
+          LABELS: 'no-pr-linked'  #相关自定义label配置 形如 label1,label2
+          LABELS_NEED: 'tech-request,feature,Feature,kind/feature,attention/feature-incomplete,bug/ut,Bug fix,kind/bug,kind/subtask,kind/tech-request'  # 指定需要排查的标签 label1,label2,...
       - name: NOTICE FAIL RESULT
         if: ${{ steps.step1.outputs.send == 'yes' }}
         run: |
