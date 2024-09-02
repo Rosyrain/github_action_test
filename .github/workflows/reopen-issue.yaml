@@ -1,0 +1,32 @@
+name: Repository Dispatch (PR)
+on:
+  issues:
+    types: [close]
+
+jobs:
+  myEvent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output info
+        run: |
+          echo "${{ github.event.client_payload }}"
+      - name: Check Issue
+        id: step1
+        uses: Rosyrain/CI_test/actions/reopen-without-PR@main
+        env:
+          BASE_URL: https://api.github.com
+        with:
+          base_url: ${{ github.api_url }}
+          repository: ${{ github.event.client_payload.repository }}
+          issue_number: ${{ github.event.client_payload.issue_number }}
+          github_token: ${{ github.event.client_payload.github_token }}
+          assignees: ${{ github.event.client_payload.assignees }}
+          labels: ${{ github.event.client_payload.labels }}
+          labels_need: ${{ github.event.client_payload.labels_need }}
+          whitelist: "sukki77,fengttt,aressu1985"
+          issue_owner: ${{ github.event.client_payload.issue_owner }}
+          close_user: ${{ github.event.client_payload.close_user }}
+      - name: NOTICE FAIL RESULT
+        if: ${{ steps.step1.outputs.send == 'yes' }}
+        run: |
+          echo "发送信息... ...当前在ci_test仓库"
