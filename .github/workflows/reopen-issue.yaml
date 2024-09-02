@@ -1,6 +1,6 @@
 name: Repository Dispatch (PR)
 on:
-  issues:
+  issue:
     types: [close]
 
 jobs:
