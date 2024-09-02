@@ -22,8 +22,8 @@ jobs:
           labels: ${{ github.event.client_payload.labels }}
           labels_need: ${{ github.event.client_payload.labels_need }}
           whitelist: "sukki77,fengttt,aressu1985"
-          issue_owner: ${{ github.event.client_payload.issue_owner }}
-          close_user: ${{ github.event.client_payload.close_user }}
+          issue_owner: ${{ github.event.issue.user.login }}
+          close_user: ${{ github.event.sender.login }}
       - name: NOTICE FAIL RESULT
         if: ${{ steps.step1.outputs.send == 'yes' }}
         run: |
