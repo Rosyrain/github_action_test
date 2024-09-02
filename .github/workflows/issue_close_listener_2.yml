@@ -7,7 +7,7 @@
 #jobs:
 #  issue_no_pr:
 #    runs-on: ubuntu-latest
-#    if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && github.actor!= 'sukki37' }}
+#    if: ${{ github.event_name == 'issues' && github.event.action == 'closed' }}
 #    steps:
 #      - name: Repository Dispatch
 #        id: step1
