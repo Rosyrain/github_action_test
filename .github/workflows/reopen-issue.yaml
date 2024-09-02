@@ -7,9 +7,6 @@ jobs:
   reopen-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Output info
-        run: |
-          echo "${{ github.event.client_payload }}"
       - name: Check Issue
         id: step1
         uses: Rosyrain/CI_test/actions/reopen-without-PR@main
