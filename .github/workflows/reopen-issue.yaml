@@ -1,7 +1,7 @@
 name: Repository Dispatch (PR)
 on:
-  issue:
-    types: [close]
+  issues:
+    types: [closed]
 
 jobs:
   myEvent:
