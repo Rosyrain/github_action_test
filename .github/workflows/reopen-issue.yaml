@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Check Issue
         id: step1
-        uses: Rosyrain/CI/actions/reopen-without-PR@reopen-issue
+        uses: Rosyrain/CI/actions/reopen-without-PR@reopend
         with:
           whitelist: 'sukki37,fengttt,aressu1985'
           issue_owner: ${{ github.event.issue.user.login }}
