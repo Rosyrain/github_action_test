@@ -13,4 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ false }}
     steps:
-      run: echo "This job should be skipped"
+      - name: echo info
+        run: echo "This job should be executed"
