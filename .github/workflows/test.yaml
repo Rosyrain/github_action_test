@@ -7,6 +7,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: test exit
-        run: |
-          exit 0
+      - name: echo info
+        run: echo "This job should be exec"
+  skip-job:
+    runs-on: ubuntu-latest
+    if: ${{ false }}
+    steps:
+      run: echo "This job should be skipped"
