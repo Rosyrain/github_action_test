@@ -1,0 +1,84 @@
+name: Add Labels for Clusters(k8s)
+
+on:
+  workflow_dispatch:
+    inputs:
+      namespace:
+        description: 'Namespace'
+        required: true
+      cluster_name:
+        description: 'Cluster Name'
+        required: false
+        default: ''
+      creator:
+        description: 'Creator'
+        required: true
+      remain_time:
+        description: 'Remain Time'
+        required: false
+        default: '48h'
+
+jobs:
+  Add-Labels:
+    runs-on: self-hosted
+    steps:
+      - name: Display Info
+        run: |
+          echo "Namespace: ${{ inputs.namespace }}"
+          echo "Cluster Name: ${{ inputs.cluster_name }}"
+          echo "Creator: ${{ inputs.creator }}"
+          echo "Remain Time: ${{ inputs.remain-time }}"
+
+      - name: Check Info
+        id: check
+        run: |
+          ADD_LABELS_MOD="cluster"
+          ACTUAL_NAMESPACE="${{ inputs.namespace }}"
+          ACTUAL_CLUSTER_NAME="${{ inputs.cluster_name }}"
+          ACTUAL_CREATOR="${{ inputs.creator }}"
+          ACTUAL_REMAIN_TIME="${{ inputs.remain_time }}"
+          
+          if [ -z "${{ inputs.namespace }}" ]; then
+            echo "namespace is empty..."
+            exit 1
+          fi
+          
+          if [ -z "${{ inputs.cluster_name }}" ]; then
+            echo "cluster_name is empty..."
+            ADD_LABELS_MOD="namespace"
+            ACTUAL_CLUSTER_NAME=""
+          fi
+          
+          if [ -z "${{ inputs.creator }}" ]; then
+            echo "creator is empty..."
+            ACTUAL_CREATOR=""
+          fi
+          
+          if [ -z "${{ inputs.remain_time }}" ]; then
+            echo "remain_time is empty..."
+            ACTUAL_REMAIN_TIME="48h"
+          fi
+          
+          echo "ADD_LABELS_MOD=${ADD_LABELS_MOD}" << GITHUB_OUTPUT
+          echo "ACTUAL_NAMESPACE=${ACTUAL_NAMESPACE}" << GITHUB_OUTPUT
+          echo "ACTUAL_CLUSTER_NAME=${ACTUAL_CLUSTER_NAME}" << GITHUB_OUTPUT
+          echo "ACTUAL_CREATOR=${ACTUAL_CREATOR}" << GITHUB_OUTPUT
+          echo "ACTUAL_REMAIN_TIME=${ACTUAL_REMAIN_TIME}" << GITHUB_OUTPUT
+
+      - name: Add Labels
+        run: |
+          if [ "${{ steps.check.outputs.ADD_LABELS_MOD }}" = "cluster" ]; then
+            kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}"
+            kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}"
+            echo "$(kubectl get mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} -ojsonpath='{.metadata.labels}')"
+            exit 0
+          fi
+          
+          if [ "${{ steps.check.outputs.ADD_LABELS_MOD }}" = "namespace" ]; then
+            kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}"
+            kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}"
+            echo "$(kubectl get ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} -ojsonpath='{.metadata.labels}')"
+            exit 0
+          fi
+          
+          echo "The value of the 'ADD_LABELS_MOD' is not in the specified range"
