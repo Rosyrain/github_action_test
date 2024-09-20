@@ -74,15 +74,15 @@ jobs:
       - name: Add Labels
         run: |
           if [ ${{ steps.check.outputs.ADD_LABELS_MOD }} = "cluster" ]; then
-            kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}"
-            kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}"
+            kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}" --overwrite
+            kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}" --overwrite
             echo "$(kubectl get mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} -ojsonpath='{.metadata.labels}')"
             exit 0
           fi
           
           if [ ${{ steps.check.outputs.ADD_LABELS_MOD }} = "namespace" ]; then
-            kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}"
-            kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}"
+            kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}" --overwrite
+            kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}" --overwrite
             echo "$(kubectl get ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} -ojsonpath='{.metadata.labels}')"
             exit 0
           fi
