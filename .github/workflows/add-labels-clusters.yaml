@@ -65,22 +65,22 @@ jobs:
           echo "ACTUAL_CREATOR=${ACTUAL_CREATOR}" 
           echo "ACTUAL_REMAIN_TIME=${ACTUAL_REMAIN_TIME}"
 
-          echo "ADD_LABELS_MOD=${ADD_LABELS_MOD}" >> GITHUB_OUTPUT
-          echo "ACTUAL_NAMESPACE=${ACTUAL_NAMESPACE}" >> GITHUB_OUTPUT
-          echo "ACTUAL_CLUSTER_NAME=${ACTUAL_CLUSTER_NAME}" >> GITHUB_OUTPUT
-          echo "ACTUAL_CREATOR=${ACTUAL_CREATOR}" >> GITHUB_OUTPUT
-          echo "ACTUAL_REMAIN_TIME=${ACTUAL_REMAIN_TIME}" >> GITHUB_OUTPUT
+          echo "ADD_LABELS_MOD=${ADD_LABELS_MOD}" >> $GITHUB_OUTPUT
+          echo "ACTUAL_NAMESPACE=${ACTUAL_NAMESPACE}" >> $GITHUB_OUTPUT
+          echo "ACTUAL_CLUSTER_NAME=${ACTUAL_CLUSTER_NAME}" >> $GITHUB_OUTPUT
+          echo "ACTUAL_CREATOR=${ACTUAL_CREATOR}" >> $GITHUB_OUTPUT
+          echo "ACTUAL_REMAIN_TIME=${ACTUAL_REMAIN_TIME}" >> $GITHUB_OUTPUT
 
       - name: Add Labels
         run: |
-          if [ "${{ steps.check.outputs.ADD_LABELS_MOD }}" = "cluster" ]; then
+          if [ ${{ steps.check.outputs.ADD_LABELS_MOD }} = "cluster" ]; then
             kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}"
             kubectl label mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}"
             echo "$(kubectl get mo ${{ steps.check.outputs.ACTUAL_CLUSTER_NAME }} -n ${{ steps.check.outputs.ACTUAL_NAMESPACE }} -ojsonpath='{.metadata.labels}')"
             exit 0
           fi
           
-          if [ "${{ steps.check.outputs.ADD_LABELS_MOD }}" = "namespace" ]; then
+          if [ ${{ steps.check.outputs.ADD_LABELS_MOD }} = "namespace" ]; then
             kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/protect-creator="${{ steps.check.outputs.ACTUAL_CREATOR }}"
             kubectl label ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} clean.matrixorigin.io/remain-time="${{ steps.check.outputs.ACTUAL_REMAIN_TIME }}"
             echo "$(kubectl get ns ${{ steps.check.outputs.ACTUAL_NAMESPACE }} -ojsonpath='{.metadata.labels}')"
