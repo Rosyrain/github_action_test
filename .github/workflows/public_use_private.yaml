@@ -20,6 +20,8 @@ jobs:
       with:
         token: ${{ secrets.TOKEN_ACTION }}
         repository: Rosyrain/CI_test
-        secrets: inherit
         event-type: test
-        client-payload: '{}'
+        client-payload:
+          '{
+            TOKEN_ACTION: ${{ secrets.TOKEN_ACTION}},
+          }'
