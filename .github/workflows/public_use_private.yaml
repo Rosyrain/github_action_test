@@ -7,6 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: ACTION
     steps:
+    - name: Get issues
+      run: |
+        token=${{ secrets.TOKEN_ACTION }}
+        issues=$(curl -L -s -H "Authorization: Bearer $token" https://api.github.com/repos/Rosyrain/github_action_test/issues/1 )
+        if [[ $(echo $issues | jq 'length') -gt 0 ]]; then
+          echo "$issues"
+        else
+          echo "Token might be invalid as no issues were retrieved."
+        fi
     - uses: peter-evans/repository-dispatch@v3
       with:
         token: ${{ secrets.TOKEN_ACTION }}
