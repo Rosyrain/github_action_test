@@ -1,0 +1,8 @@
+name: Public repo Use Private repo workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    uses: Rosyrain/CI_test/.github/workflows/private_use_public.yaml@main
+    secrets: inherit
