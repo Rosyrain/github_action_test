@@ -1,29 +1,29 @@
-#name: Check Closed Issues Without PR
-#
-#on:
-#  issues:
-#    types: [closed]
-#
-#jobs:
-#  issue_no_pr:
-#    runs-on: ubuntu-latest
-#    if: ${{ github.event_name == 'issues' && github.event.action == 'closed' }}
-#    steps:
-#      - name: Repository Dispatch
-#        id: step1
-#        uses: peter-evans/repository-dispatch@v3
-#        with:
-#          token: ${{ secrets.TOKEN }}
-#          repository: Rosyrain/CI_test
-#          event-type: reopen-without-PR
-#          client-payload: '{"owner": "${{ github.repository_owner }}",
-#            "repository": "${{ github.repository }}",
-#            "issue_number": "${{ github.event.issue.number }}",
-#            "github_token": "${{ secrets.TOKEN }}",
-#            "assignees": "Rosyrain",
-#            "labels": "no-pr-linked-test3",
-#            "labels_need": "tech-request,feature,Feature,kind/feature,attention/feature-incomplete,bug/ut,Bug fix,kind/bug,kind/subtask,kind/tech-request"}'
-#      - name: NOTICE FAIL RESULT
-#        if: ${{ steps.step1.outputs.send == 'yes' }}
-#        run: |
-#          echo "发送信息... ..."
+name: Check Closed Issues Without PR
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  issue_no_pr:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'issues' && github.event.action == 'closed' }}
+    steps:
+      - name: Repository Dispatch
+        id: step1
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.TOKEN }}
+          repository: Rosyrain/CI_test
+          event-type: reopen-without-PR
+          client-payload: '{"owner": "${{ github.repository_owner }}",
+            "repository": "${{ github.repository }}",
+            "issue_number": "${{ github.event.issue.number }}",
+            "github_token": "${{ secrets.TOKEN }}",
+            "assignees": "Rosyrain",
+            "labels": "no-pr-linked-test3",
+            "labels_need": "tech-request,feature,Feature,kind/feature,attention/feature-incomplete,bug/ut,Bug fix,kind/bug,kind/subtask,kind/tech-request"}'
+      - name: NOTICE FAIL RESULT
+        if: ${{ steps.step1.outputs.send == 'yes' }}
+        run: |
+          echo "发送信息... ..."
