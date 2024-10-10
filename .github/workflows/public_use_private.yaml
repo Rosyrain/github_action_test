@@ -4,5 +4,11 @@ on:
 
 jobs:
   job1:
-    uses: Rosyrain/CI_test/.github/workflows/private_use_public.yaml@main
-    secrets: inherit
+    runs-on: ubuntu-latest
+    environment: ACTION
+    steps:
+    - uses: peter-evans/repository-dispatch@v3
+      with:
+        secrets: inherit
+        event-type: test
+        client-payload: '{}'
