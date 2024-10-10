@@ -6,6 +6,8 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     environment: ACTION
+    outputs:
+      workflow: ${{ steps.s2.outputs.workflow }}
     steps:
     - name: Get issues
       run: |
@@ -16,11 +18,27 @@ jobs:
         else
           echo "Token might be invalid as no issues were retrieved."
         fi
-    - uses: peter-evans/repository-dispatch@v3
-      with:
-        token: ${{ secrets.TOKEN_ACTION }}
-        repository: Rosyrain/CI_test
-        event-type: test
-        client-payload: '{
-          "TOKEN_ACTION": "${{ secrets.TOKEN_ACTION}}"
-          }'
+  checkout-private-workflow:
+    runs-on: ubuntu-latest
+    environment: ACTION
+    steps:
+      - name: checkout-private-repo
+        uses: checkout-action@v4
+        with:
+          repo: Rosyrain/CI_test
+          ref: main
+          path: ./CI
+      - name: Output workflow yaml
+        id: s2
+        run: |
+          echo "workflow=$(cat ./CI/.github/workflows/environment_secrets_test.yaml)" >> $GITHUB_OUTPUT
+
+  uses-private-workflow:
+    needs: [checkout-private-workflow]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Workflow
+        run: |
+          cd $GITHUB_WORKSPACE
+          echo "${{ needs.checkout-private-workflow.outputs.workflow }}" >> workflow.yaml
+      - uses: ${{ github.workspace }}/workflow.yaml
