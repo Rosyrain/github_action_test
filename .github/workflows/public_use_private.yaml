@@ -21,6 +21,7 @@ jobs:
         token: ${{ secrets.TOKEN_ACTION }}
         repository: Rosyrain/CI_test
         event-type: test
-        client-payload: '{
-            TOKEN_ACTION: ${{ secrets.TOKEN_ACTION}},
+        client-payload:
+          '{
+            TOKEN_ACTION: ${{ secrets.TOKEN_ACTION}}
           }'
