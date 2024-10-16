@@ -1,4 +1,4 @@
-name: Get Secrets
+name: Template Test
 on:
   workflow_dispatch:
 
@@ -6,11 +6,6 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: get secrets
+      - name: test
         run: |
-          EE_LIST=$(echo "${{ secrets.* }}" | grep "EE_")
-          for ee_name in $EE_LIST; do
-            echo "ee_name=$ee_name"
-            value="${{ secrets[$ee_name] }}"
-            export "$ee_name=$value"
-          done
+          echo "hello, world"
