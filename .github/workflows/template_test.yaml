@@ -10,3 +10,4 @@ jobs:
         run: |
           echo "hello, world"
           export test=${{ secrets.TEST }}
+          export TOKEN_ACTION=${{ secrets.TOKEN_ACTION }}
