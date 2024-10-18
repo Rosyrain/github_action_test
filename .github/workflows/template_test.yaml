@@ -19,4 +19,4 @@ jobs:
 
       - name: Check Failures
         if: ${{ always() && !cancelled() && (steps.s1.conclusion == 'failure' || steps.s2.conclusion == 'failure') }}
-        run: echo "s1:${{ steps.s1.status }},s2:${{ steps.s2.status }}"
+        run: echo "s1:${{ steps.s1.conclusion }},s2:${{ steps.s2.conclusion }}"
