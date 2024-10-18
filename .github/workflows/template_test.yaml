@@ -18,5 +18,5 @@ jobs:
         run: echo "Step 2 running."
 
       - name: Check Failures
-        if: ${{ failed() && !cancelled() && (steps.s1.status == 'failure' || steps.s2.status == 'failure') }}
+        if: ${{ always() && !cancelled() && (steps.s1.conclusion == 'failure' || steps.s2.conclusion == 'failure') }}
         run: echo "s1:${{ steps.s1.status }},s2:${{ steps.s2.status }}"
