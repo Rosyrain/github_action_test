@@ -8,10 +8,15 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
+      - name: Start time
+        id: job_start
+        run: echo "START_TIME=$(date)" >> $GITHUB_OUTPUT
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
+          echo  ${{ steps.job_start.outputs.START_TIME }}
+          echo "======================================================="
           echo "$GITHUB_CONTEXT"
           echo "======================================================="
           echo "action_time=${{ github.action_time }}"
