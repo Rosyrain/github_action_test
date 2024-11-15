@@ -6,8 +6,10 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: test
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo "${{ github.action }}"
+          echo "$GITHUB_CONTEXT"
           echo "======================================================="
           echo "action_time=${{ github.action_time }}"
