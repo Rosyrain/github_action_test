@@ -10,7 +10,14 @@ jobs:
     steps:
       - name: Start time
         id: job_start
-        run: echo "START_TIME=$(date)" >> $GITHUB_OUTPUT
+        run: ｜
+          # 设置时区为上海时区
+          export TZ='Asia/Shanghai'
+
+          # 获取格式化的日期时间字符串
+          time=$(date '+%Y-%m-%d %H:%M:%S')
+
+          echo "START_TIME=${time}" >> $GITHUB_OUTPUT
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
