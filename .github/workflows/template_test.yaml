@@ -8,6 +8,6 @@ jobs:
     steps:
       - name: test
         run: |
-          echo "${{ github }}"
+          echo "${{ github.action }}"
           echo "======================================================="
           echo "action_time=${{ github.action_time }}"
