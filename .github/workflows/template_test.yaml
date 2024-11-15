@@ -1,7 +1,9 @@
 name: Template Test
 on:
   workflow_dispatch:
-
+  pull_request:
+    branches:
+      - main
 jobs:
   Test:
     runs-on: ubuntu-latest
