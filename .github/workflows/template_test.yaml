@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Start time
         id: job_start
-        run: ｜
+        run: |
           # 设置时区为上海时区
           export TZ='Asia/Shanghai'
 
