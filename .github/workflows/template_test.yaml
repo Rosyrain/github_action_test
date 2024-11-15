@@ -11,6 +11,17 @@ jobs:
       - name: Start time
         id: job_start
         run: |
+          # 原始的 UTC 时间
+          utcTime="2024-11-15T08:33:52Z"
+          
+          # 转换为上海时区并格式化
+          # 使用 date 命令和 +%Y-%m-%d\ %H:%M:%S 格式字符串
+          # 使用 %z 来获取原始时间的时区偏移，然后手动调整为上海时区
+          shanghaiTime=$(date -d "${utcTime}" '+%Y-%m-%d %H:%M:%S')
+          
+          # 打印结果
+          echo $shanghaiTime
+          
           # 设置时区为上海时区
           export TZ='Asia/Shanghai'
 
