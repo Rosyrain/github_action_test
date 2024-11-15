@@ -8,4 +8,6 @@ jobs:
     steps:
       - name: test
         run: |
-          echo "hello, world"
+          echo "$GITHUB_CONTEXT"
+          echo "======================================================="
+          echo "action_time=${{ github.run_started_at }}"
