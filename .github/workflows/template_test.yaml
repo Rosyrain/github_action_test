@@ -11,6 +11,9 @@ jobs:
       - name: Start time
         id: job_start
         run: |
+          # 设置时区为上海时区
+          export TZ='Asia/Shanghai'
+          
           # 原始的 UTC 时间
           utcTime="2024-11-15T08:33:52Z"
           
@@ -21,9 +24,6 @@ jobs:
           
           # 打印结果
           echo $shanghaiTime
-          
-          # 设置时区为上海时区
-          export TZ='Asia/Shanghai'
 
           # 获取格式化的日期时间字符串
           time=$(date '+%Y-%m-%d %H:%M:%S')
