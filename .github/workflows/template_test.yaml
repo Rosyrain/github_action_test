@@ -17,7 +17,7 @@ jobs:
           # 原始的 UTC 时间
           #utcTime="2024-11-15T08:33:52Z"
           action_time=${{ github.event.pull_request.head.repo.pushed_at }}
-          echo "$action_time"
+          echo "action_time:$action_time"
           # 转换为上海时区并格式化
           # 使用 date 命令和 +%Y-%m-%d\ %H:%M:%S 格式字符串
           
