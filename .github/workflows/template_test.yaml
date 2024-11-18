@@ -15,15 +15,17 @@ jobs:
           export TZ='Asia/Shanghai'
           
           # 原始的 UTC 时间
-          utcTime="2024-11-15T08:33:52Z"
+          #utcTime="2024-11-15T08:33:52Z"
+          action_time=${{ github.pull_requests.head.pushed_at }}
           
           # 转换为上海时区并格式化
           # 使用 date 命令和 +%Y-%m-%d\ %H:%M:%S 格式字符串
+          
           # 使用 %z 来获取原始时间的时区偏移，然后手动调整为上海时区
-          shanghaiTime=$(date -d "${utcTime}" '+%Y-%m-%d %H:%M:%S')
+          ACTiON_TIME=$(date -d "${action_time}" '+%Y-%m-%d %H:%M:%S')
           
           # 打印结果
-          echo $shanghaiTime
+          echo "$ACTION_TIME"
 
           # 获取格式化的日期时间字符串
           time=$(date '+%Y-%m-%d %H:%M:%S')
@@ -37,4 +39,5 @@ jobs:
           echo "======================================================="
           echo "$GITHUB_CONTEXT"
           echo "======================================================="
+          
           echo "action_time=${{ github.action_time }}"
