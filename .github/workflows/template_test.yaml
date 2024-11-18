@@ -16,7 +16,7 @@ jobs:
           
           # 原始的 UTC 时间
           #utcTime="2024-11-15T08:33:52Z"
-          action_time=${{ github.pull_requests.head.pushed_at }}
+          action_time=${{ github.pull_requests.head.pushed_at.repo }}
           
           # 转换为上海时区并格式化
           # 使用 date 命令和 +%Y-%m-%d\ %H:%M:%S 格式字符串
@@ -25,7 +25,7 @@ jobs:
           ACTiON_TIME=$(date -d "${action_time}" '+%Y-%m-%d %H:%M:%S')
           
           # 打印结果
-          echo "$ACTION_TIME"
+          echo "ACTION_TIME=${ACTION_TIME}" >> $GITHUB_OUTPUT
 
           # 获取格式化的日期时间字符串
           time=$(date '+%Y-%m-%d %H:%M:%S')
@@ -35,7 +35,8 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo  ${{ steps.job_start.outputs.START_TIME }}
+          echo "ACTION_TIME=${{ steps.job_start.outputs.ACTION_TIME }}"
+          echo  "START_TIME=${{ steps.job_start.outputs.START_TIME }}"
           echo "======================================================="
           echo "$GITHUB_CONTEXT"
           echo "======================================================="
