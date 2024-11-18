@@ -23,7 +23,7 @@ jobs:
           
           # 使用 %z 来获取原始时间的时区偏移，然后手动调整为上海时区
           ACTiON_TIME=$(date -d "${action_time}" '+%Y-%m-%d %H:%M:%S')
-          
+          echo "ACTION_TIME:$ACTiON_TIME"
           # 打印结果
           echo "ACTION_TIME=${ACTION_TIME}" >> $GITHUB_OUTPUT
 
