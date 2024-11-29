@@ -52,7 +52,6 @@ jobs:
           if [ -z "${{ inputs.creator }}" ]; then
             echo "creator is empty..."
             ACTUAL_CREATOR=""
-            exit 1
           fi
           
           if [ -z "${{ inputs.remain_time }}" ]; then
